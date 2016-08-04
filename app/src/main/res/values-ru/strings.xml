@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GitHub Users</string>
+    <string name="action_settings">Настройки</string>
+    <string name="avatar">Аватар</string>
+    <string name="action_search">Поиск</string>
+    <string name="undefined">Не определено</string>
+    <string name="action_delete">Удалить</string>
+
+    <!-- dialogs -->
+    <string name="dialog_alert_title">Удалить пользователей</string>
+    <string name="dialog_alert_message">Вы действительно желаете удалить всех пользователей?</string>
+</resources>
