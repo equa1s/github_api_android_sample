@@ -13,11 +13,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.githubretrofit.controllers.GitHubUserController;
+import com.android.githubretrofit.controllers.callbacks.GitHubRepositoriesCallback;
+import com.android.githubretrofit.controllers.callbacks.GitHubUserCallback;
+import com.android.githubretrofit.controllers.GitHubApiController;
 import com.android.githubretrofit.database.loaders.UserLoader;
+import com.android.githubretrofit.database.model.Repository;
 import com.android.githubretrofit.database.model.User;
+import com.android.githubretrofit.ui.RecyclerViewClickListener;
 import com.android.githubretrofit.ui.SimpleDividerItemDecoration;
 import com.android.githubretrofit.ui.adapters.UserListAdapter;
 import com.android.githubretrofit.util.Dialogs;
@@ -38,18 +44,19 @@ import static com.android.githubretrofit.util.Logger.log;
  */
 public class MainActivity
         extends AppCompatActivity
-        implements GitHubUserController.GitHubUserCallbackListener,
-            LoaderManager.LoaderCallbacks<List<User>> {
+        implements GitHubUserCallback,
+            GitHubRepositoriesCallback,
+            LoaderManager.LoaderCallbacks<List<User>>, RecyclerViewClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private UserListAdapter mUserListAdapter = null;
-    private GitHubUserController mUserController;
+    private GitHubApiController mUserController;
 
     @BindView(R.id.users_recycler_view) public RecyclerView mRecyclerView;
 
     public MainActivity() {
-        this.mUserController = new GitHubUserController(this);
+        this.mUserController = new GitHubApiController(this);
     }
 
     @Override
@@ -70,7 +77,7 @@ public class MainActivity
 
     private void initRecyclerView() {
 
-        mUserListAdapter = new UserListAdapter(this, new ArrayList<User>());
+        mUserListAdapter = new UserListAdapter(this, new ArrayList<User>(), this);
 
         if (mRecyclerView != null) {
 
@@ -82,7 +89,6 @@ public class MainActivity
             mRecyclerView.setLayoutManager(llm);
             mRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
             mRecyclerView.setAdapter(mUserListAdapter);
-
         }
     }
 
@@ -164,11 +170,26 @@ public class MainActivity
         log(TAG, "Loader has been reset.");
     }
 
+    @Override
+    public void onSuccess(List<Repository> repositories) {
+        log(TAG, "User repositories: " + repositories.toString());
+    }
+
     private void initLoader() {
         getSupportLoaderManager().initLoader(UserLoader.USER_LOADER_ID, null, this).forceLoad();
     }
 
     private void restartLoader() {
         getSupportLoaderManager().restartLoader(UserLoader.USER_LOADER_ID, null, this).forceLoad();
+    }
+
+    @Override
+    public void onUserClick(View view) {
+        if (view instanceof TextView) {
+            List<User> users = SugarRecord.find(User.class, "login = ?", ((TextView)view).getText().toString());
+            User currentUser = users.get(0);
+            log(TAG, "User: " + currentUser.getLogin());
+            mUserController.getUserRepositories(currentUser.getLogin());
+        }
     }
 }

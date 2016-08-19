@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.android.githubretrofit.R;
 import com.android.githubretrofit.database.model.User;
+import com.android.githubretrofit.ui.RecyclerViewClickListener;
 import com.android.githubretrofit.util.NumberUtils;
 import com.bumptech.glide.Glide;
 
@@ -18,6 +19,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 /**
  * {@author equa1s}
@@ -27,26 +29,34 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserCa
     private List<User> mData;
     private LayoutInflater mLayoutInflater;
     private Context context;
+    private RecyclerViewClickListener listener;
 
     public static class UserCardHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.git_hub_user_id) public TextView id;
         @BindView(R.id.git_hub_user_name) public TextView name;
         @BindView(R.id.git_hub_user_email) public TextView email;
-        @BindView(R.id.git_hub_user_login)public TextView login;
-        @BindView(R.id.git_hub_user_avatar)public ImageView avatar;
+        @BindView(R.id.git_hub_user_login) public TextView login;
+        @BindView(R.id.git_hub_user_avatar) public ImageView avatar;
 
-        public UserCardHolder(View itemView) {
+        public UserCardHolder(final View itemView, final RecyclerViewClickListener listener) {
             super(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onUserClick(login);
+                }
+            });
             ButterKnife.bind(this, itemView);
         }
 
     }
 
-    public UserListAdapter(@NonNull Context context, @NonNull List<User> data) {
+    public UserListAdapter(@NonNull Context context, @NonNull List<User> data, @NonNull RecyclerViewClickListener listener) {
         this.context = context;
         this.mData = data;
         this.mLayoutInflater = LayoutInflater.from(context);
+        this.listener = listener;
     }
 
     @Override
@@ -59,7 +69,7 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserCa
         else
             v = mLayoutInflater.inflate(R.layout.github_user_card_right, parent, false);
 
-        return new UserCardHolder(v);
+        return new UserCardHolder(v, listener);
 
     }
 
