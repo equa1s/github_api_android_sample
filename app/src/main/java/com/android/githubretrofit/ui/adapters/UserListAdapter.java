@@ -33,8 +33,8 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserCa
 
     public static class UserCardHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.git_hub_user_id) public TextView id;
-        @BindView(R.id.git_hub_user_name) public TextView name;
+        //@BindView(R.id.git_hub_user_id) public TextView id;
+        //@BindView(R.id.git_hub_user_name) public TextView name;
         @BindView(R.id.git_hub_user_email) public TextView email;
         @BindView(R.id.git_hub_user_login) public TextView login;
         @BindView(R.id.git_hub_user_avatar) public ImageView avatar;
@@ -64,10 +64,14 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserCa
 
         View v;
 
-        if (NumberUtils.isPair(viewType))
+        /*if (NumberUtils.isPair(viewType))
             v = mLayoutInflater.inflate(R.layout.github_user_card_left, parent, false);
         else
-            v = mLayoutInflater.inflate(R.layout.github_user_card_right, parent, false);
+            v = mLayoutInflater.inflate(R.layout.github_user_card_right, parent, false);*/
+        if (NumberUtils.isPair(viewType))
+            v = mLayoutInflater.inflate(R.layout.github_user_card_pair, parent, false);
+        else
+            v = mLayoutInflater.inflate(R.layout.github_user_card_not_pair, parent, false);
 
         return new UserCardHolder(v, listener);
 
@@ -78,10 +82,10 @@ public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.UserCa
 
         User user = mData.get(position);
 
-            holder.id.setText(String.valueOf(user.getGithubId()));
+            //holder.id.setText(String.valueOf(user.getGithubId()));
             holder.login.setText(user.getLogin());
             holder.email.setText(user.getEmail());
-            holder.name.setText(user.getName());
+            //holder.name.setText(user.getName());
 
         Glide.with(context).load(user.getAvatarUrl()).into(holder.avatar);
     }

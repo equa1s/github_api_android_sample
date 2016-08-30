@@ -23,6 +23,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".DetailUserActivity"/>
+
         <meta-data android:name="DATABASE" android:value="githubretrofit.db" />
         <meta-data android:name="VERSION" android:value="9" />
         <meta-data android:name="QUERY_LOG" android:value="true" />

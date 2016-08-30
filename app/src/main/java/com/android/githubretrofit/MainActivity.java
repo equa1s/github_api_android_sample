@@ -1,6 +1,7 @@
 package com.android.githubretrofit;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -45,7 +46,6 @@ import static com.android.githubretrofit.util.Logger.log;
 public class MainActivity
         extends AppCompatActivity
         implements GitHubUserCallback,
-            GitHubRepositoriesCallback,
             LoaderManager.LoaderCallbacks<List<User>>, RecyclerViewClickListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -170,11 +170,6 @@ public class MainActivity
         log(TAG, "Loader has been reset.");
     }
 
-    @Override
-    public void onSuccess(List<Repository> repositories) {
-        log(TAG, "User repositories: " + repositories.toString());
-    }
-
     private void initLoader() {
         getSupportLoaderManager().initLoader(UserLoader.USER_LOADER_ID, null, this).forceLoad();
     }
@@ -189,7 +184,10 @@ public class MainActivity
             List<User> users = SugarRecord.find(User.class, "login = ?", ((TextView)view).getText().toString());
             User currentUser = users.get(0);
             log(TAG, "User: " + currentUser.getLogin());
-            mUserController.getUserRepositories(currentUser.getLogin());
+            Intent intent = new Intent(this, DetailUserActivity.class);
+                intent.putExtra(DetailUserActivity.USER_DATA, currentUser);
+            startActivity(intent);
+            // mUserController.getUserRepositories(currentUser.getLogin());
         }
     }
 }
