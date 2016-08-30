@@ -18,14 +18,11 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.githubretrofit.controllers.callbacks.GitHubRepositoriesCallback;
 import com.android.githubretrofit.controllers.callbacks.GitHubUserCallback;
 import com.android.githubretrofit.controllers.GitHubApiController;
 import com.android.githubretrofit.database.loaders.UserLoader;
-import com.android.githubretrofit.database.model.Repository;
 import com.android.githubretrofit.database.model.User;
 import com.android.githubretrofit.ui.RecyclerViewClickListener;
-import com.android.githubretrofit.ui.SimpleDividerItemDecoration;
 import com.android.githubretrofit.ui.adapters.UserListAdapter;
 import com.android.githubretrofit.util.Dialogs;
 import com.orm.SugarRecord;
@@ -33,6 +30,7 @@ import com.orm.SugarRecord;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -87,7 +85,6 @@ public class MainActivity
                 llm.setOrientation(LinearLayoutManager.VERTICAL);
 
             mRecyclerView.setLayoutManager(llm);
-            mRecyclerView.addItemDecoration(new SimpleDividerItemDecoration(this));
             mRecyclerView.setAdapter(mUserListAdapter);
         }
     }
@@ -103,7 +100,15 @@ public class MainActivity
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
                 public boolean onQueryTextSubmit(String query) {
-                    mUserController.getUser(query);
+                    List<User> users = SugarRecord.find(User.class, "login = ?", query);
+                    if (users != null && !users.isEmpty()) {
+                        User user = users.get(0);
+                        if (user != null) {
+                            Toast.makeText(MainActivity.this, R.string.user_already_added, Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        mUserController.getUser(query);
+                    }
                     return true;
                 }
 
@@ -167,6 +172,7 @@ public class MainActivity
 
     @Override
     public void onLoaderReset(Loader<List<User>> loader) {
+        mUserListAdapter.swap(null);
         log(TAG, "Loader has been reset.");
     }
 
@@ -187,7 +193,6 @@ public class MainActivity
             Intent intent = new Intent(this, DetailUserActivity.class);
                 intent.putExtra(DetailUserActivity.USER_DATA, currentUser);
             startActivity(intent);
-            // mUserController.getUserRepositories(currentUser.getLogin());
         }
     }
 }
