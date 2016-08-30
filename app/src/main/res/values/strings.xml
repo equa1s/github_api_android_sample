@@ -9,4 +9,6 @@
     <!-- dialogs -->
     <string name="dialog_alert_title">Видалити користувачів</string>
     <string name="dialog_alert_message">Ви дійсно бажаєте видалити всіх користувачів?</string>
+    <string name="add">Додати</string>
+    <string name="user_already_added">Користувач вже доданий!</string>
 </resources>

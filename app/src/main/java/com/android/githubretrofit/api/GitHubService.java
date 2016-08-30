@@ -20,10 +20,10 @@ import retrofit2.http.Path;
  */
 public interface GitHubService {
 
-    @GET(Constants.GitHubApi.USERS_ENDPOINT + Constants.Url.PAT_SEPARATOR + "{user}")
+    @GET(Constants.GitHubApi.USERS_ENDPOINT + Constants.Url.PATH_SEPARATOR + "{user}")
     Call<User> getUser(@Path("user") String user);
 
-    @GET(Constants.GitHubApi.USERS_ENDPOINT + Constants.Url.PAT_SEPARATOR + "{user}" + Constants.Url.PAT_SEPARATOR + Constants.GitHubApi.REPOSITORIES_ENDPOINT)
+    @GET(Constants.GitHubApi.USERS_ENDPOINT + Constants.Url.PATH_SEPARATOR + "{user}" + Constants.Url.PATH_SEPARATOR + Constants.GitHubApi.REPOSITORIES_ENDPOINT)
     Call<List<Repository>> getRepositories(@Path("user") String user);
 
 }

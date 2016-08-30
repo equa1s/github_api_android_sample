@@ -42,7 +42,7 @@ public class DetailUserActivity extends AppCompatActivity implements GitHubRepos
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.user_datails_layout);
+        setContentView(R.layout.user_details_layout);
         ButterKnife.bind(this);
 
         Bundle bundle = getIntent().getExtras();

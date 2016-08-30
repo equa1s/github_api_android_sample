@@ -10,4 +10,6 @@
     <!-- dialogs -->
     <string name="dialog_alert_title">Удалить пользователей</string>
     <string name="dialog_alert_message">Вы действительно желаете удалить всех пользователей?</string>
+    <string name="add">Добавить</string>
+    <string name="user_already_added">Пользователь уже добавлен</string>
 </resources>

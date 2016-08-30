@@ -5,15 +5,15 @@
     <item
         android:id="@+id/action_search"
         android:orderInCategory="100"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="@string/action_settings"
+        android:icon="@mipmap/ic_add_white_48dp"
+        android:title="@string/add"
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="ifRoom|collapseActionView"/>
 
     <item
         android:id="@+id/action_flash"
         android:orderInCategory="100"
-        android:icon="@android:drawable/ic_menu_delete"
+        android:icon="@mipmap/ic_delete_white_48dp"
         android:title="@string/action_delete"
         app:showAsAction="always"/>
 

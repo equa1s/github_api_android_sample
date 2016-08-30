@@ -6,7 +6,7 @@ package com.android.githubretrofit.util;
 public interface Constants {
 
     interface Url {
-        String PAT_SEPARATOR = "/";
+        String PATH_SEPARATOR = "/";
     }
 
     interface GitHubApi {
