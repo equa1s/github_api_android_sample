@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GitHub Users</string>
+    <string name="app_name">GH Users</string>
     <string name="action_settings">Налаштування</string>
     <string name="avatar">Аватар</string>
     <string name="action_search">Пошук</string>
@@ -11,4 +11,9 @@
     <string name="dialog_alert_message">Ви дійсно бажаєте видалити всіх користувачів?</string>
     <string name="add">Додати</string>
     <string name="user_already_added">Користувач вже доданий!</string>
+    <string name="user_details_activity_title">Деталі про користувача</string>
+    <string name="company">Компанія:</string>
+    <string name="location">Локація:</string>
+    <string name="id">ІД:</string>
+    <string name="email">Емейл:</string>
 </resources>

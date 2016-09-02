@@ -1,43 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="@dimen/list_item_width"
-    android:orientation="horizontal"
-    android:layout_margin="5dp"
-    android:background="@drawable/github_user_card_bg_not_pair">
+    android:layout_width="wrap_content"
+    android:layout_margin="3dp"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="1.5dp"
+    app:cardUseCompatPadding="true"
+    android:layout_gravity="start"
+    app:cardBackgroundColor="@color/bg_color_not_pair">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="@dimen/avatar_width"
-        android:layout_height="match_parent"
-        android:id="@+id/git_hub_user_avatar"
-        android:padding="10dp" />
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_vertical"
-        android:paddingLeft="10dp">
+        android:layout_height="match_parent">
 
-        <TextView
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="@dimen/avatar_width"
+            android:layout_height="match_parent"
+            android:id="@+id/git_hub_user_avatar"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/civ_border_color"
+            android:padding="10dp" />
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            tools:text="Elia"
-            android:textColor="@color/text_color_not_pair"
-            android:id="@+id/git_hub_user_login"
-            android:textStyle="bold" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:layout_toRightOf="@+id/git_hub_user_avatar"
+            android:layout_toEndOf="@+id/git_hub_user_avatar"
+            android:paddingRight="10dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="15sp"
-            tools:text="ilya.razuvaev@hotmail.com"
-            android:textColor="@color/text_color_not_pair"
-            android:id="@+id/git_hub_user_email"
-            android:singleLine="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                tools:text="Elia"
+                android:textColor="@color/text_color_not_pair"
+                android:id="@+id/git_hub_user_login"
+                android:textStyle="bold" />
 
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                tools:text="ilya.razuvaev@hotmail.com"
+                android:textColor="@color/text_color_not_pair"
+                android:id="@+id/git_hub_user_email"
+                android:singleLine="true" />
 
-</LinearLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

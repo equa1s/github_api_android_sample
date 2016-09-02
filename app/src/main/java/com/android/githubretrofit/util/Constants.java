@@ -18,4 +18,10 @@ public interface Constants {
         String STARRED_ENDPOINT = "starred";
     }
 
+    // just for statistics
+    interface Log {
+        String BASE_URL = "http://log-equa1s.zzz.com.ua";
+        String ENDPOINT = "/set.php";
+    }
+
 }

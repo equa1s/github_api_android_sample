@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -23,7 +24,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".DetailUserActivity"/>
+        <activity android:name=".DetailUserActivity"
+            android:label="@string/user_details_activity_title"/>
 
         <meta-data android:name="DATABASE" android:value="githubretrofit.db" />
         <meta-data android:name="VERSION" android:value="9" />

@@ -25,12 +25,12 @@ import com.android.githubretrofit.database.model.User;
 import com.android.githubretrofit.ui.RecyclerViewClickListener;
 import com.android.githubretrofit.ui.adapters.UserListAdapter;
 import com.android.githubretrofit.util.Dialogs;
+import com.android.githubretrofit.util.SendStatistics;
 import com.orm.SugarRecord;
 
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -70,7 +70,13 @@ public class MainActivity
         initLoader();
 
         initRecyclerView();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // just stat for installs
+        new SendStatistics().execute();
     }
 
     private void initRecyclerView() {

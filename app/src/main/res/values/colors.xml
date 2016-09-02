@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#2d7a7a</color>
-    <color name="colorPrimaryDark">#236262</color>
+    <color name="colorPrimary">#2a2a2a</color>
+    <color name="colorPrimaryDark">#202020</color>
     <color name="colorAccent">#FF4081</color>
 
-    <color name="git_hub_user_card_background">#c0c0c0</color>
-    <color name="git_hub_recycler_view_background">#ffffff</color>
+    <color name="git_hub_recycler_view_background">#d9d9d9</color>
 
     <color name="text_color_primary">#3F51B5</color>
 
-    <color name="bg_color_pair">#c83a9a9a</color>
-    <color name="text_color_pair">#FFF</color>
-    <color name="bg_color_not_pair">#c8c6c6c6</color>
+    <color name="bg_color_pair">#FFF</color>
+    <color name="text_color_pair">#000</color>
+    <color name="bg_color_not_pair">#FFF</color>
     <color name="text_color_not_pair">#000</color>
+
+    <color name="civ_border_color">#322a2a2a</color>
+    <color name="detailed_color_bg">#b4ffffff</color>
+    <color name="header_color_bg">#dba6ddff</color>
+    <color name="border_color_bg">#a584d1ff</color>
+    <color name="divider_color">#d0d9d9d9</color>
 </resources>

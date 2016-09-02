@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">GitHub Users</string>
+    <string name="app_name">GH Users</string>
     <string name="action_settings">Настройки</string>
     <string name="avatar">Аватар</string>
     <string name="action_search">Поиск</string>
@@ -12,4 +12,9 @@
     <string name="dialog_alert_message">Вы действительно желаете удалить всех пользователей?</string>
     <string name="add">Добавить</string>
     <string name="user_already_added">Пользователь уже добавлен</string>
+    <string name="user_details_activity_title">Детали о пользователе</string>
+    <string name="company">Компания:</string>
+    <string name="location">Локация:</string>
+    <string name="id">ИД:</string>
+    <string name="email">Эмейл:</string>
 </resources>

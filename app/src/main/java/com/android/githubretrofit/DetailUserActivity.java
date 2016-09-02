@@ -6,13 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.android.githubretrofit.controllers.GitHubApiController;
-import com.android.githubretrofit.controllers.callbacks.GitHubRepositoriesCallback;
-import com.android.githubretrofit.database.model.Repository;
 import com.android.githubretrofit.database.model.User;
 import com.bumptech.glide.Glide;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,26 +18,34 @@ import static com.android.githubretrofit.util.Logger.log;
 /**
  * {@author equa1s}
  */
-public class DetailUserActivity extends AppCompatActivity implements GitHubRepositoriesCallback {
+public class DetailUserActivity extends AppCompatActivity {
 
-    public static final String USER_DATA = "user_data";
     private static final String TAG = DetailUserActivity.class.getSimpleName();
 
-    private User mUser = null;
-    private GitHubApiController mGitHubApiController = null;
+    public static final String USER_DATA = "user_data";
 
-    @BindView(R.id.avatar) public CircleImageView mUserAvatar;
-    @BindView(R.id.login) public TextView mLogin;
-    @BindView(R.id.created_at) public TextView mCreatedAt;
+    private User mUser = null;
+
+    @BindView(R.id.user_name) public TextView mUserName;
+    @BindView(R.id.user_avatar) public CircleImageView mUserAvatar;
+    @BindView(R.id.user_id) public TextView mUserId;
+    @BindView(R.id.user_company) public TextView mUserCompany;
+    @BindView(R.id.user_location) public TextView mUserLocation;
+    @BindView(R.id.user_email) public TextView mUserEmail;
 
     public DetailUserActivity() {
-        mGitHubApiController = new GitHubApiController(this);
+        log(TAG, "construct");
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_details_layout);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         ButterKnife.bind(this);
 
         Bundle bundle = getIntent().getExtras();
@@ -52,11 +55,6 @@ public class DetailUserActivity extends AppCompatActivity implements GitHubRepos
 
         if (mUser != null) {
             setUserData();
-            if (getSupportActionBar() != null) {
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setTitle(mUser.getLogin() + ":" + mUser.getGithubId());
-            }
-            mGitHubApiController.getUserRepositories(mUser.getLogin());
         }
 
     }
@@ -69,25 +67,34 @@ public class DetailUserActivity extends AppCompatActivity implements GitHubRepos
         }
     }
 
-    @Override
-    public void onSuccess(List<Repository> repositories) {
-        log(TAG, "User repositories: " + repositories.toString());
-    }
-
-    @Override
-    public void onFailure(Throwable throwable) {
-
-    }
-
-    @Override
-    public void onFinish() {
-
-    }
-
     private void setUserData() {
         loadAvatar();
-        mLogin.setText(mUser.getLogin());
-        mCreatedAt.setText(mUser.getCreatedAt());
+        mUserId.setText(String.valueOf(mUser.getGithubId()));
+
+        String location = mUser.getLocation();
+        if (location != null && !location.isEmpty())
+            mUserLocation.setText(location);
+        else
+            mUserLocation.setText("- / -");
+
+        String company = mUser.getCompany();
+        if (company != null && !company.isEmpty())
+            mUserCompany.setText(company);
+        else
+            mUserCompany.setText("- / -");
+
+        String email = mUser.getEmail();
+        if (email != null && !email.isEmpty())
+            mUserEmail.setText(email);
+        else
+            mUserEmail.setText("- / -");
+
+        String username = mUser.getLogin();
+        if (username != null && !username.isEmpty())
+            mUserName.setText(username);
+        else
+            mUserName.setText("- / -");
+
     }
 
     private void loadAvatar() {
