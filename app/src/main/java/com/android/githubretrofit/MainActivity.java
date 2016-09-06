@@ -25,9 +25,8 @@ import com.android.githubretrofit.database.model.User;
 import com.android.githubretrofit.ui.RecyclerViewClickListener;
 import com.android.githubretrofit.ui.adapters.UserListAdapter;
 import com.android.githubretrofit.util.Dialogs;
-import com.android.githubretrofit.util.SendStatistics;
+import com.android.githubretrofit.util.Utils;
 import com.orm.SugarRecord;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,8 +74,7 @@ public class MainActivity
     @Override
     protected void onResume() {
         super.onResume();
-        // just stat for installs
-        new SendStatistics().execute();
+        Utils.sendData();
     }
 
     private void initRecyclerView() {
